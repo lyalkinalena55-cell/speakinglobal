@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeakinGlobal | Milena Bakova</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0F1E2D',
+                        beige: '#EDE6DA',
+                        ivory: '#F4F1EB',
+                        gold: '#B8A46A',
+                        red: '#EF4444',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Manrope', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F4F1EB; color: #0F1E2D; }
+        /* Headings use Manrope (Sans-serif) instead of Playfair */
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .font-display { font-family: 'Manrope', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .text-balance { text-wrap: balance; }
+        
+        .bg-grid-pattern {
+            background-image: linear-gradient(#0F1E2D 1px, transparent 1px), linear-gradient(90deg, #0F1E2D 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+            opacity: 0.03;
+        }
+        
+        /* Modal Transition */
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .book-shadow {
+            box-shadow: 
+                5px 5px 15px rgba(0,0,0,0.15),
+                20px 20px 40px rgba(15,30,45,0.2);
+        }
+
+        /* FORCE OVERRIDES FOR TILDA CSS */
+        .t-form .t-input-group {
+            margin-bottom: 1rem !important;
+        }
+        .t-form .t-input-block {
+            width: 100% !important;
+        }
+        
+        /* Checkbox Fix */
+        .custom-checkbox-wrapper {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+        }
+        .custom-checkbox-wrapper input[type="checkbox"] {
+            appearance: checkbox !important;
+            -webkit-appearance: checkbox !important;
+            width: 18px !important;
+            height: 18px !important;
+            margin-top: 3px !important;
+            padding: 0 !important;
+            border: 1px solid #0F1E2D !important;
+            background: white !important;
+            flex-shrink: 0 !important;
+            cursor: pointer !important;
+            position: static !important;
+            opacity: 1 !important;
+        }
+        .custom-checkbox-wrapper label {
+            cursor: pointer !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 12px !important;
+            line-height: 1.4 !important;
+            color: rgba(15, 30, 45, 0.6) !important;
+            display: inline-block !important;
+            width: auto !important;
+        }
+        
+        /* Input overrides */
+        .t-input {
+            height: auto !important;
+            color: #0F1E2D !important;
+            border-radius: 0 !important;
+            font-size: 14px !important;
+        }
+        
+        /* Error styles */
+        .input-error {
+            border: 2px solid #EF4444 !important;
+            background-color: #FEF2F2 !important;
+        }
+        .checkbox-error {
+            outline: 2px solid #EF4444 !important;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-white relative">
+
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-50 bg-[#F4F1EB]/95 backdrop-blur-sm border-b border-navy/10 transition-all duration-300">
+        <div class="container mx-auto px-6 md:px-12 h-20 flex justify-between items-center">
+            <div class="flex flex-col justify-center">
+                <span class="text-lg tracking-widest font-bold uppercase text-navy font-display">SpeakinGlobal</span>
+                <span class="text-[9px] text-navy/60 tracking-[0.2em] uppercase font-sans">by Milena Bakova</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-6 text-[10px] font-bold tracking-widest text-navy/60 uppercase">
+                <span>TED Translator</span>
+                <span class="w-1 h-1 bg-gold rounded-full"></span>
+                <span>Executive Mentor</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BLOCK 1: HERO -->
+    <section class="relative min-h-[90vh] pt-32 pb-20 flex items-center bg-ivory">
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Content -->
+                <div class="lg:col-span-7 space-y-10">
+                    
+                    <div class="inline-flex items-center gap-3 border-b-2 border-gold pb-1">
+                        <span class="text-xs font-bold tracking-[0.2em] uppercase text-gold">SpeakinGlobal Strategy</span>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl lg:text-[4rem] leading-[1.1] font-bold text-navy text-balance font-display">
+                        Одна фраза на английском может стоить контракта на 
+                        <span class="text-gold relative inline-block px-1">$50 000</span>
+                        <br><span class="text-3xl md:text-4xl lg:text-[3.5rem] text-navy/80 block mt-2 font-normal">и дело не в грамматике</span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-xl text-navy/80 leading-relaxed font-normal text-balance border-l-2 border-gold/30 pl-6">
+                        Заберите 130 устойчивых бизнес-фраз для деловых переговоров, которые заставляют оппонентов <span class="font-bold text-navy">слушать, доверять и соглашаться</span>.
+                    </p>
+
+                    <!-- Insight Box -->
+                    <div class="bg-white p-6 rounded-sm border border-navy/10 shadow-sm max-w-xl">
+                        <p class="text-base text-navy/80 leading-relaxed">
+                            <span class="font-bold text-navy uppercase text-[10px] tracking-wider block mb-2">Research Insight</span>
+                            Статистика неумолима: <span class="font-bold text-navy">70% международных сделок</span> срываются не из-за плохих условий, а из-за «неверного тона» и потери инициативы в диалоге.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-6 pt-4 items-start sm:items-center">
+                        <button onclick="openModal()" class="bg-navy text-white px-10 py-5 text-xs font-bold uppercase tracking-[0.15em] hover:bg-gold transition-colors duration-300 w-full sm:w-auto shadow-xl shadow-navy/10 border border-navy font-display">
+                            ЗАБРАТЬ АРСЕНАЛ ПЕРЕГОВОРЩИКА
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Visual (OPTION 4 - EDITORIAL BOOK) -->
+                <div class="lg:col-span-5 relative hidden lg:flex justify-center items-center">
+                    <div class="relative w-[320px] h-[480px] flex justify-center items-center">
+                        
+                        <!-- THE BOOK ARTIFACT -->
+                        <div class="relative w-[300px] h-[460px] bg-white book-shadow flex flex-col transform hover:-translate-y-2 transition-transform duration-500 z-10 border-r border-gray-200">
+                            <!-- Binding effect (Left Shadow) -->
+                            <div class="absolute top-0 left-0 w-4 h-full bg-gradient-to-r from-black/10 to-transparent z-20 pointer-events-none"></div>
+                            
+                            <!-- Header (Navy Band) -->
+                            <div class="bg-navy h-[28%] p-6 flex flex-col justify-between text-white relative overflow-hidden">
+                                <span class="text-[9px] font-bold uppercase tracking-[0.2em] relative z-10 font-display">Strategic Communication</span>
+                                <div class="absolute -right-4 -top-4 w-20 h-20 bg-gold rounded-full opacity-20"></div>
+                                <div class="relative z-10 flex justify-between items-end">
+                                    <i data-lucide="shield" class="w-6 h-6 text-gold"></i>
+                                </div>
+                            </div>
+
+                            <!-- Body -->
+                            <div class="flex-grow p-8 flex flex-col justify-center text-center">
+                                <h2 class="font-serif text-5xl text-navy leading-none mb-2 font-bold">130</h2>
+                                <p class="text-xl text-navy font-serif italic mb-6">Phrases for<br>Negotiation</p>
+                                
+                                <div class="w-12 h-[2px] bg-gold mx-auto mb-6"></div>
+                                
+                                <p class="text-[10px] text-navy/60 uppercase tracking-widest leading-relaxed font-display">
+                                    The essential guide<br>for executive leaders
+                                </p>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="p-5 text-center border-t border-navy/5 bg-beige/30">
+                                <span class="font-bold text-navy text-[10px] tracking-[0.2em] uppercase font-display">Milena Bakova</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Book Spine Shadow (3D effect behind) -->
+                        <div class="absolute top-[10px] left-4 w-[290px] h-[460px] bg-navy -z-10 transform translate-x-3 translate-y-3 opacity-10"></div>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCK 2: DIAGNOSTICS -->
+    <section class="py-20 px-6 bg-beige border-t border-navy/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-pattern pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="mb-12 border-b border-navy/10 pb-8 text-center md:text-left">
+                <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-navy/50 mb-3 block flex items-center justify-center md:justify-start gap-2">
+                    <span class="w-8 h-px bg-navy/30"></span> Лингвистический аудит
+                </span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl text-navy leading-tight font-display font-bold">
+                    3 причины, по которым вы отдаете контроль и теряете деньги
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- REASON 1 -->
+                <div class="md:col-span-2 bg-ivory shadow-sm border border-navy/5 flex flex-col lg:flex-row relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gold"></div>
+                    <div class="lg:w-1/2 p-8 md:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-navy/5">
+                        <div class="flex items-baseline gap-4 mb-4">
+                            <span class="text-4xl font-display text-navy/10 font-black">01</span>
+                            <h3 class="text-2xl font-bold text-navy font-display">Вы «слишком вежливы»</h3>
+                        </div>
+                        <p class="text-base md:text-lg text-navy/70 leading-relaxed font-normal">
+                            В международной бизнес-культуре прямые переводы русских вежливых фраз часто звучат как жесткие требования или скрытая агрессия. Вместо того чтобы расположить к себе партнера, вы заставляете его защищаться.
+                        </p>
+                    </div>
+                    <div class="lg:w-1/2 w-full bg-navy p-8 md:p-12 text-ivory flex flex-col justify-center">
+                        <div class="mb-6 pb-6 border-b border-white/10">
+                            <div class="flex justify-between items-center mb-2">
+                                <p class="text-[10px] font-bold text-white/40 uppercase tracking-widest">Ошибка</p>
+                                <i data-lucide="x" class="w-4 h-4 text-white/30"></i>
+                            </div>
+                            <p class="text-xl font-display font-medium text-white mb-2 opacity-60 line-through decoration-gold/50">"I want to say..."</p>
+                            <p class="text-[11px] text-gold mt-2">
+                                <span class="uppercase tracking-widest text-white/40 inline-block mr-1">Партнер слышит:</span>
+                                «Замолчите и слушайте меня! Я требую внимания».
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <p class="text-[10px] font-bold text-gold uppercase tracking-widest">Позиция эксперта</p>
+                                <i data-lucide="check" class="w-4 h-4 text-gold"></i>
+                            </div>
+                            <p class="text-2xl font-display font-bold text-white">"May I come in here?"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REASON 2 (Balanced Height) -->
+                <div class="bg-ivory p-8 border border-navy/5 hover:border-gold/30 transition-all duration-300 group shadow-sm flex flex-col h-full justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold text-navy group-hover:text-gold transition-colors font-display">Обесценивание вашей экспертизы</h3>
+                            <span class="text-2xl font-display text-navy/10 font-bold group-hover:text-gold/20">02</span>
+                        </div>
+                        <p class="text-navy/70 mb-6 font-normal text-sm leading-relaxed">
+                            Когда вы используете примитивные конструкции (<span class="italic">good, bad, think</span>), партнер инстинктивно снижает планку ваших профессиональных компетенций.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-navy/5 mt-auto">
+                        <p class="text-[10px] font-bold text-navy uppercase tracking-wider flex items-center gap-2">
+                            <i data-lucide="arrow-down-right" class="w-3 h-3 text-gold"></i> В результате вы теряете авторитет.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- REASON 3 (Balanced Height) -->
+                <div class="bg-ivory p-8 border border-navy/5 hover:border-gold/30 transition-all duration-300 group shadow-sm flex flex-col h-full justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold text-navy group-hover:text-gold transition-colors font-display">Потеря контроля над диалогом</h3>
+                            <span class="text-2xl font-display text-navy/10 font-bold group-hover:text-gold/20">03</span>
+                        </div>
+                        <p class="text-navy/70 mb-6 font-normal text-sm leading-relaxed">
+                            Паузы для поиска слов создают вакуум в коммуникации, который моментально заполняет оппонент.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-navy/5 mt-auto">
+                        <p class="text-[10px] font-bold text-navy uppercase tracking-wider flex items-start gap-2">
+                            <i data-lucide="alert-triangle" class="w-3 h-3 text-gold flex-shrink-0"></i> Вы добровольно отдаете инициативу.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-12">
+                <button onclick="openModal()" class="text-navy px-8 py-4 text-[10px] font-bold uppercase tracking-[0.2em] border border-navy hover:bg-navy hover:text-white transition-all duration-300 font-display">
+                    ПОЛУЧИТЬ ДОСТУП К ФРАЗАМ
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCK 3: EXPERT -->
+    <section class="py-20 px-6 bg-navy text-ivory relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-[#162A3F]"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 items-start">
+                
+                <!-- Left: Text -->
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold leading-tight mb-8 text-white border-l-4 border-gold pl-6">
+                        «Я видела, как эксперты с 20-летним опытом теряли лицо за 10 минут переговоров».
+                    </h2>
+
+                    <div class="space-y-6 text-ivory/80 text-lg font-light leading-relaxed pl-6">
+                        <p>
+                            Меня зовут <strong class="text-white">Милена Бакова</strong>. В прошлом — синхронный переводчик первых лиц и сотрудник международной компании Kerzner Group (Mazagan Beach Resort, Atlantis Dubai). В настоящем — ментор, которому доверяют топ-менеджеры.
+                        </p>
+                        <p>
+                            Работая в <span class="text-white border-b border-gold/30">Агентстве международного экономического развития</span>, я поняла главное: ваша экспертиза стоит ровно столько, за сколько вы можете «продать» ее на английском.
+                        </p>
+                        <p>
+                            Я видела, как опытные специалисты теряются, когда нужно быстро среагировать на вопрос иностранного партнера. Я знаю, как обидно звучать непрофессионально, когда внутри у вас — гениальное решение.
+                        </p>
+                        
+                        <div class="bg-white/5 p-6 border border-white/5 mt-6 backdrop-blur-sm">
+                            <p class="font-display font-bold text-xl text-gold mb-3">
+                                «В бизнесе нет времени вспоминать грамматику. Вам нужен рычаг».
+                            </p>
+                            <p class="text-sm text-ivory/60">
+                                Я дам вам то, что работает в реальных переговорных. Это набор готовых реакций: как вежливо отказать, как перебить, как настоять на своем. Вы просто берете эти фразы и используете их как рычаг, чтобы повернуть разговор в свою сторону.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Quote/Insight Card (CORRECT QUOTE RESTORED) -->
+                <div class="lg:w-1/2 w-full flex justify-center lg:justify-end mt-12 lg:mt-0">
+                    <div class="relative w-full max-w-sm bg-beige p-8 border-l-4 border-gold shadow-lg">
+                        <i data-lucide="quote" class="text-gold w-12 h-12 mb-4 opacity-50"></i>
+                        <p class="font-display text-2xl font-bold text-navy leading-tight">
+                            Не позволяйте языковому барьеру ограничивать ваш доход и влияние.
+                        </p>
+                        <div class="mt-6 flex items-center gap-3">
+                            <div class="h-px w-12 bg-navy/20"></div>
+                            <span class="text-xs font-bold text-navy uppercase tracking-widest font-display">Milena Bakova</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block 3.5: The Solution List -->
+            <div class="mt-16 pt-8 border-t border-white/10">
+                <h3 class="text-xl md:text-2xl font-display font-bold text-white mb-10 text-left leading-relaxed max-w-3xl">
+                    Я собрала 130 Business English Collocations, которые закроют <span class="text-gold">90%</span> ваших потребностей в коммуникации.
+                </h3>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <p class="text-gold font-bold uppercase text-[10px] tracking-widest mb-3 font-display">01 / Вместо пауз</p>
+                        <p class="text-ivory/70 text-sm font-normal">У вас будут автоматические фразы для заполнения пауз и перехода к своей мысли.</p>
+                    </div>
+                    <div>
+                        <p class="text-gold font-bold uppercase text-[10px] tracking-widest mb-3 font-display">02 / Вместо неуверенности</p>
+                        <p class="text-ivory/70 text-sm font-normal">Вы будете знать, как звучит «бизнес-стандарт» в переговорах о цене или сроках.</p>
+                    </div>
+                    <div>
+                        <p class="text-gold font-bold uppercase text-[10px] tracking-widest mb-3 font-display">03 / Вместо страха</p>
+                        <p class="text-ivory/70 text-sm font-normal">Вы поймете, как вежливо перебить, как уточнить детали и как закрыть сделку.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 flex justify-start">
+                 <button onclick="openModal()" class="bg-gold text-navy px-10 py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors w-full sm:w-auto font-display">
+                    Забрать гайд
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCK 4: PRODUCT DETAILS -->
+    <section class="py-20 px-6 bg-ivory">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-12 gap-16 items-center">
+                
+                <div class="lg:col-span-5 order-2 lg:order-1">
+                    <div class="relative p-10 bg-white border border-navy/5 shadow-sm">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-navy"></div>
+                        
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 bg-beige flex items-center justify-center text-navy shrink-0">
+                                    <i data-lucide="book-open" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display text-lg text-navy font-bold">130 Collocations</h4>
+                                    <p class="text-[10px] text-navy/60 uppercase tracking-wider mt-1">Переговоры • Презентации</p>
+                                </div>
+                            </div>
+                            <div class="w-full h-px bg-navy/5"></div>
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 bg-beige flex items-center justify-center text-navy shrink-0">
+                                    <i data-lucide="headphones" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display text-lg text-navy font-bold">Аудио-сопровождение</h4>
+                                    <p class="text-[10px] text-navy/60 uppercase tracking-wider mt-1">Интонация носителя</p>
+                                </div>
+                            </div>
+                            <div class="w-full h-px bg-navy/5"></div>
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 bg-beige flex items-center justify-center text-navy shrink-0">
+                                    <i data-lucide="layout" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display text-lg text-navy font-bold">Реальные ситуации</h4>
+                                    <p class="text-[10px] text-navy/60 uppercase tracking-wider mt-1">Живые диалоги</p>
+                                </div>
+                            </div>
+                             <div class="w-full h-px bg-navy/5"></div>
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 bg-beige flex items-center justify-center text-navy shrink-0">
+                                    <i data-lucide="zap" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-display text-lg text-navy font-bold">Метод внедрения</h4>
+                                    <p class="text-[10px] text-navy/60 uppercase tracking-wider mt-1">Сегодня выучил - завтра применил</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 order-1 lg:order-2">
+                    <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-gold mb-6 block font-display">Арсенал переговорщика</span>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-navy mb-8 leading-tight">
+                        Фразы, которые делают вашу речь профессиональной.
+                    </h2>
+                    <p class="text-navy/70 text-lg font-light mb-10 max-w-xl">
+                        Заберите ваш арсенал фраз, которые позволяют выходить победителем из самых сложных переговоров. Разделенные по темам, с аудио и примерами.
+                    </p>
+
+                    <div class="space-y-6 border-t border-navy/10 pt-8">
+                        <p class="font-bold text-navy uppercase text-[10px] tracking-wider mb-4">Этот гайд для вас, если:</p>
+                        <ul class="space-y-4">
+                            <li class="flex gap-4 items-start">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-gold flex-shrink-0 mt-0.5"></i>
+                                <p class="text-navy/80 font-light text-sm"><strong class="font-bold text-navy">Вы — Senior-специалист или Тимлид</strong>, и вам нужно защищать интересы команды перед заказчиком.</p>
+                            </li>
+                            <li class="flex gap-4 items-start">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-gold flex-shrink-0 mt-0.5"></i>
+                                <p class="text-navy/80 font-light text-sm"><strong class="font-bold text-navy">Вы — Предприниматель</strong>, выходящий на международный рынок.</p>
+                            </li>
+                             <li class="flex gap-4 items-start">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-gold flex-shrink-0 mt-0.5"></i>
+                                <p class="text-navy/80 font-light text-sm"><strong class="font-bold text-navy">Вы — HR или Маркетолог</strong>, работающий в глобальной компании.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-8 bg-navy/5 p-6 border-l-2 border-gold">
+                        <p class="text-sm italic text-navy/80">«Даже если ваш уровень Intermediate, эти фразы мгновенно «поднимут» ваше звучание до уровня Advanced в глазах собеседника».</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCK 6: FINAL CTA -->
+    <section class="py-24 px-6 bg-white border-t border-navy/5">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-display font-bold text-navy mb-6">
+                Ваша следующая победа в переговорах начинается здесь
+            </h2>
+            <p class="text-xl text-navy/60 font-light mb-12">
+                Перестаньте «учить язык» и начните использовать его как инструмент для закрытия сделок. Получите 130 готовых сценариев, которые помогут вам звучать уверенно, даже если ваш уровень далек от носителя.
+                <br><br>
+                <span class="text-navy font-bold block">Даже если у вас переговоры уже завтра утром, этого списка хватит, чтобы подготовиться за 15 минут.</span>
+            </p>
+            <button onclick="openModal()" class="bg-navy text-white px-12 py-6 text-sm font-bold uppercase tracking-[0.2em] hover:bg-gold transition-colors duration-300 shadow-xl shadow-navy/10 font-display">
+                ПОЛУЧИТЬ ДОСТУП БЕСПЛАТНО
+            </button>
+            <p class="mt-8 text-[10px] text-navy/40 uppercase tracking-widest">Доступно мгновенно в Telegram</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy py-12 border-t border-white/10 text-center">
+        <div class="container mx-auto">
+            <p class="text-[10px] text-white/30 uppercase tracking-widest font-display">&copy; 2024 SpeakinGlobal by Milena Bakova. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div id="contactModal" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-navy/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="bg-white w-full max-w-md relative z-10 p-8 md:p-10 shadow-2xl border-t-4 border-gold">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-navy/40 hover:text-navy transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-display font-bold text-navy mb-2">Получить Арсенал</h3>
+                <p class="text-sm text-navy/60 font-light">Оставьте данные для доступа к гайду и аудио.</p>
+            </div>
+
+            <!-- Tilda Form Configuration 
+                 Added onsubmit to trigger validation script
+            -->
+            <form id="form-lead-magnet" name='form-lead-magnet' role="form" action="https://forms.tildacdn.com/procces/" method="POST" data-formactiontype="2" data-inputbox=".t-input-group" class="js-form-proccess t-form" data-success-url="https://project20786216.tilda.ws/thanks" onsubmit="return validateForm(event)">
+                
+                <input type="hidden" name="formservices[]" value="All" class="js-formaction-services">
+                <input type="hidden" name="form-name" value="Lead Magnet Request">
+                <input type="hidden" name="tildaspec-formname" value="Lead Magnet Request">
+                
+                <div class="t-input-group t-input-group_nm space-y-2 mb-4">
+                    <label class="block text-xs font-bold uppercase tracking-widest text-navy mb-1 !text-navy">Ваше Имя<span class="text-red-500">*</span></label>
+                    <input type="text" name="Name" required data-tilda-req="1" class="t-input !w-full !bg-ivory !border !border-navy/10 !px-4 !py-3 !text-navy !h-auto focus:!outline-none focus:!border-gold transition-colors !rounded-none" placeholder="Иван Петров">
+                </div>
+                <div class="t-input-group t-input-group_em space-y-2 mb-4">
+                    <label class="block text-xs font-bold uppercase tracking-widest text-navy mb-1 !text-navy">Email<span class="text-red-500">*</span></label>
+                    <input type="email" name="Email" required data-tilda-req="1" class="t-input !w-full !bg-ivory !border !border-navy/10 !px-4 !py-3 !text-navy !h-auto focus:!outline-none focus:!border-gold transition-colors !rounded-none" placeholder="ivan@example.com">
+                </div>
+                <div class="t-input-group t-input-group_ph space-y-2 mb-4">
+                    <label class="block text-xs font-bold uppercase tracking-widest text-navy mb-1 !text-navy">Телефон<span class="text-red-500">*</span></label>
+                    <input type="tel" name="Phone" required data-tilda-req="1" class="t-input !w-full !bg-ivory !border !border-navy/10 !px-4 !py-3 !text-navy !h-auto focus:!outline-none focus:!border-gold transition-colors !rounded-none" placeholder="+7 (999) 000-00-00">
+                </div>
+                
+                <div class="t-input-group flex items-start gap-3 mt-4 mb-6 custom-checkbox-wrapper">
+                    <input type="checkbox" id="privacy" name="Privacy" required data-tilda-req="1" class="t-input mt-1 accent-gold shrink-0 !w-4 !h-4 !mt-1 !shrink-0 !appearance-auto">
+                    <label for="privacy" class="text-xs text-navy/60 font-light cursor-pointer !text-navy/60">
+                        Я согласен с <a href="/policy" target="_blank" class="underline hover:text-navy">политикой конфиденциальности</a> и даю согласие на обработку персональных данных.<span class="text-red-500">*</span>
+                    </label>
+                </div>
+
+                <div class="t-form__submit">
+                    <button id="submit-button" type="submit" class="t-submit w-full bg-navy text-white py-4 mt-2 text-xs font-bold uppercase tracking-[0.2em] hover:bg-gold transition-colors !bg-navy !text-white hover:!bg-gold !h-auto !rounded-none">
+                        ПОЛУЧИТЬ ДОСТУП БЕСПЛАТНО
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Manual Initialization of Tilda Form Scripts
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                if (typeof t_forms__init == 'function') {
+                    t_forms__init();
+                }
+            }, 1000);
+        });
+
+        function openModal() {
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            if (typeof t_forms__init == 'function') {
+                t_forms__init();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Custom Validation Script attached to button click
+        document.getElementById('submit-button').addEventListener('click', function(event) {
+            const form = document.getElementById('form-lead-magnet');
+            const inputs = form.querySelectorAll('input[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                // Clear previous errors
+                input.classList.remove('input-error');
+                if (input.type === 'checkbox') {
+                     input.parentElement.classList.remove('checkbox-error');
+                }
+
+                // Check values
+                if (input.type === 'checkbox') {
+                    if (!input.checked) {
+                        isValid = false;
+                        input.parentElement.classList.add('checkbox-error');
+                    }
+                } else {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('input-error');
+                    }
+                }
+            });
+
+            if (!isValid) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+            // If valid, allow event to propagate so Tilda's script catches it
+        });
+    </script>
+</body>
+</html>
