@@ -1,0 +1,136 @@
+<!-- TAILWIND & CONFIG -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    navy: '#0F1E2D',
+                    beige: '#EDE6DA',
+                    ivory: '#F4F1EB',
+                    gold: '#B8A46A',
+                },
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    display: ['Manrope', 'sans-serif'],
+                }
+            }
+        }
+    }
+</script>
+
+<!-- FONTS & STYLES -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+    /* FIX: Fullscreen Overlay Mode */
+    #custom-thank-you-root { 
+        font-family: 'Inter', sans-serif; 
+        background-color: #F4F1EB; 
+        color: #0F1E2D;
+        position: fixed !important; /* Фиксируем поверх всего */
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: auto; /* Прокрутка, если контент не влезает */
+        z-index: 2147483647 !important; /* Максимально возможный z-index */
+        display: flex;
+        flex-direction: column;
+    }
+    #custom-thank-you-root h1, 
+    #custom-thank-you-root h2, 
+    #custom-thank-you-root h3 { 
+        font-family: 'Manrope', sans-serif; 
+    }
+    
+    .bg-grid-pattern {
+        background-image: linear-gradient(#0F1E2D 1px, transparent 1px), linear-gradient(90deg, #0F1E2D 1px, transparent 1px);
+        background-size: 40px 40px;
+        background-position: center center;
+        opacity: 0.03;
+    }
+</style>
+
+<!-- MAIN WRAPPER WITH ID FOR MOVING TO BODY -->
+<div id="custom-thank-you-root" class="antialiased selection:bg-gold selection:text-white">
+
+    <!-- NAV (Simplified) -->
+    <nav class="w-full bg-[#F4F1EB]/95 backdrop-blur-sm border-b border-navy/10 flex-shrink-0">
+        <div class="container mx-auto px-6 h-20 flex justify-center items-center">
+            <div class="flex flex-col justify-center items-center">
+                <span class="text-lg tracking-widest font-bold uppercase text-navy font-display">SpeakinGlobal</span>
+                <span class="text-[9px] text-navy/60 tracking-[0.2em] uppercase font-sans">by Milena Bakova</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow flex items-center justify-center relative px-6 py-12">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-grid-pattern pointer-events-none"></div>
+        
+        <!-- Decoration Blur -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold rounded-full mix-blend-multiply filter blur-3xl opacity-5 pointer-events-none"></div>
+
+        <div class="max-w-2xl w-full bg-white p-10 md:p-16 border border-navy/5 shadow-2xl relative z-10 text-center">
+            <!-- Top Accent Line -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-navy"></div>
+
+            <!-- Icon -->
+            <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg shadow-navy/20">
+                <i data-lucide="check" class="w-8 h-8 text-gold"></i>
+            </div>
+
+            <!-- Headline -->
+            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-gold mb-4 block font-display">Заявка принята</span>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-6 leading-tight font-display">
+                Ваш «Арсенал переговорщика» уже ждет вас
+            </h1>
+
+            <!-- Body Text -->
+            <p class="text-lg text-navy/70 font-light mb-10 leading-relaxed">
+                Гайд <span class="font-medium text-navy">«130 Business English Collocations»</span> и аудио-уроки сформированы. Чтобы получить доступ к материалам, перейдите в Telegram-бот и нажмите кнопку <span class="bg-beige px-2 py-0.5 rounded text-xs font-bold text-navy uppercase tracking-wider">Start</span>.
+            </p>
+
+            <!-- CTA Button -->
+            <!-- ЗАМЕНИТЕ ССЫЛКУ НИЖЕ НА ВАШЕГО БОТА -->
+            <a href="https://t.me/ВАШ_БОТ" target="_blank" class="group relative inline-flex items-center justify-center bg-navy text-white px-10 py-5 w-full md:w-auto text-xs md:text-sm font-bold uppercase tracking-[0.15em] hover:bg-gold transition-all duration-300 shadow-xl shadow-navy/10 overflow-hidden font-display no-underline">
+                <span class="relative z-10 flex items-center gap-3">
+                    <i data-lucide="send" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    Забрать гайд в Telegram
+                </span>
+            </a>
+
+            <!-- Helper Text -->
+            <p class="mt-8 text-[10px] text-navy/40 uppercase tracking-widest font-display">
+                Проверьте Telegram, бот уже отправил сообщение
+            </p>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white py-8 border-t border-navy/5 text-center relative z-10 flex-shrink-0">
+        <div class="container mx-auto px-6">
+            <p class="text-[10px] text-navy/30 uppercase tracking-widest font-display">&copy; 2024 SpeakinGlobal by Milena Bakova. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // CRITICAL FIX: Move the overlay to the body to avoid being trapped in Tilda's containers
+        document.addEventListener("DOMContentLoaded", function() {
+            const overlay = document.getElementById('custom-thank-you-root');
+            if (overlay && document.body) {
+                document.body.appendChild(overlay);
+            }
+        });
+        // Fallback for immediate execution if DOMContentLoaded already fired
+        if (document.body) {
+             const overlay = document.getElementById('custom-thank-you-root');
+             if (overlay) document.body.appendChild(overlay);
+        }
+    </script>
+</div>
